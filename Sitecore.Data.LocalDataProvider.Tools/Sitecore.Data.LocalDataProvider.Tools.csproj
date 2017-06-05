@@ -58,7 +58,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Sitecore.Kernel">
-      <HintPath>..\libs\8.2\Sitecore.Kernel.dll</HintPath>
+      <HintPath>..\libs\7.5\Sitecore.Kernel.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
