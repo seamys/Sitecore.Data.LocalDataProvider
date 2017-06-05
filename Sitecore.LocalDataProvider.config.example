@@ -1,0 +1,9 @@
+<configuration xmlns:patch="http://www.sitecore.net/xmlconfig/">
+  <sitecore>
+    <settings>
+      <setting name="LocalData.Enable" value="false"/>
+      <setting name="LocalData.Allow.Databases" value="Sitecore_web,Sitecore_master,Sitecore_core"/>
+      <setting name="LocalData.Exclude.Querys" value="EventQueue"/>
+    </settings>
+  </sitecore>
+</configuration>

@@ -1,0 +1,27 @@
+﻿<Controls:MetroWindow x:Class="Sitecore.Data.LocalDataProvider.Tools.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:local="clr-namespace:Sitecore.Data.LocalDataProvider.Tools"
+        mc:Ignorable="d"
+        Title="Sitecore.Data.LocalDataProvider.Tools" 
+        BorderThickness="0" 
+        Width="800"
+        GlowBrush="Black"
+        ResizeMode="CanResizeWithGrip" 
+        Drop="DataFileDrop" 
+        AllowDrop="True"
+        WindowTransitionsEnabled="False">
+    <StackPanel>
+        <StackPanel Margin="10,10,10,10">
+            <Label>Database ,QueryText, Parameters:</Label>
+            <TextBox Height="80" Name="QueryText"></TextBox>
+        </StackPanel>
+        <StackPanel Margin="10,10,10,10">
+            <Label>Query Result</Label>
+            <DataGrid Height="339" Name="QueryResult" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
+        </StackPanel>
+    </StackPanel>
+</Controls:MetroWindow>
