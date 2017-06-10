@@ -4,7 +4,7 @@
 
 ### What is it for?
 
-Storing data to the local file system when Sitecore is first launched.
+Storage data to the local file system when Sitecore first launch.
 The data will be stored */data/cache* folder. if you don't need, just delete it. 
 
 ### Why you need it?
