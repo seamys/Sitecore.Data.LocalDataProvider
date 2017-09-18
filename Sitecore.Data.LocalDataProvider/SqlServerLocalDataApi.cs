@@ -47,7 +47,7 @@ namespace Sitecore.Data.LocalDataProvider
                 return sb.ToString();
             }
         }
-        protected virtual string MakeQueryText(string sql, object[] parameters)
+        protected virtual string MakeQueryText(string sql, object[] parameters, ref string itemId)
         {
             StringBuilder builder = new StringBuilder();
             builder.Append(_database);
@@ -57,17 +57,22 @@ namespace Sitecore.Data.LocalDataProvider
             int index = 0;
             while (index < parameters.Length - 1)
             {
-                builder.AppendFormat("@{0}='{1}'", parameters[index], parameters[index + 1]);
+                string name = parameters[index].ToString();
+                string value = parameters[index + 1].ToString();
+                itemId = name == "itemId" ? value : null;
+                builder.AppendFormat("@{0}='{1}'", name, value);
                 index += 2;
             }
             return builder.ToString();
         }
-        protected virtual string GetLocalFileName(string hash)
+        protected virtual string GetLocalFileName(string hash, string itemId)
         {
             string folder = $"{AppDomain.CurrentDomain.BaseDirectory}{Settings.DataFolder.TrimStart('/')}\\cache\\";
             if (!Directory.Exists(folder))
                 Directory.CreateDirectory(folder);
-            return $"{folder}{_database}-{hash}.dat";
+            if (!string.IsNullOrWhiteSpace(itemId))
+                itemId = $"-{itemId}";
+            return $"{folder}{_database}-{hash}{itemId}.dat";
         }
         public override DataProviderReader CreateReader(string sql, params object[] parameters)
         {
@@ -76,8 +81,9 @@ namespace Sitecore.Data.LocalDataProvider
             {
                 if (!IsNeedCaching(sql, parameters))
                     return base.CreateReader(sql, parameters);
-                var queryText = MakeQueryText(sql, parameters);
-                var file = GetLocalFileName(CalculateHash(queryText));
+                string itemId = null;
+                var queryText = MakeQueryText(sql, parameters, ref itemId);
+                var file = GetLocalFileName(CalculateHash(queryText), itemId);
                 if (File.Exists(file))
                 {
                     command = new LocalDataProviderCommand(file);
@@ -115,7 +121,7 @@ namespace Sitecore.Data.LocalDataProvider
             if (allowedDatabases != "*")
             {
                 string[] database = allowedDatabases.ToLower()
-                    .Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries);
+                    .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
                 if (_database == null || database.Length <= 0)
                     return false;
                 bool isMatchDb = database.Any(dbName => _database == dbName);
