@@ -34,11 +34,3 @@ Unfortunately, sitecore is very easy to lose cache when you compile and publish 
     </main>
   </dataProviders>
 ````
-
-### How to contact me?
-##### **website:**
-http://www.frllk.com
-##### **email:**
-yiim@foxmail.com
-##### **wechat:**
-<img alt="SEAMYSHAI" src="https://www.frllk.com/wechat.jpg" width="200" />
